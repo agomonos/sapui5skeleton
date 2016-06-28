@@ -1,10 +1,9 @@
 sap.ui.define([
     'jquery.sap.global',
     'sap/m/MessageToast',
-    './MyUtils',
     'sap/ui/core/routing/History',
     'sap/ui/core/mvc/Controller'
-], function (jQuery, MessageToast, MyUtils, History, Controller) {
+], function (jQuery, MessageToast, History, Controller) {
     "use strict";
 
     var TmpController = Controller.extend("myapp.controller.Tmp", {

@@ -1,0 +1,18 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core">
+    <ViewSettingsDialog
+        confirm="confirmDialog">
+        <sortItems>
+            <ViewSettingsItem text="{locale>myapp.dialogInvoice.shipperName}" key="ShipperName" selected="true" />
+            <ViewSettingsItem text="{locale>myapp.dialogInvoice.productName}" key="ProductName"/>
+            <ViewSettingsItem text="{locale>myapp.dialogInvoice.quantity}" key="Quantity" />
+            <ViewSettingsItem text="{locale>myapp.dialogInvoice.price}" key="ExtendedPrice" />
+        </sortItems>
+        <groupItems>
+            <ViewSettingsItem text="{locale>myapp.dialogInvoice.shipperName}" key="ShipperName" selected="true" />
+            <ViewSettingsItem text="{locale>myapp.dialogInvoice.productName}" key="ProductName" />
+            <ViewSettingsItem text="{locale>myapp.dialogInvoice.price}" key="ExtendedPrice" />
+        </groupItems>
+    </ViewSettingsDialog>
+</core:FragmentDefinition>

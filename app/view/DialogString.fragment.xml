@@ -1,0 +1,14 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core">
+    <ViewSettingsDialog
+        confirm="confirmDialog">
+        <sortItems>
+            <ViewSettingsItem text="{locale>myapp.string.char}" key="character" selected="true" />
+            <ViewSettingsItem text="{locale>myapp.string.occurrences}" key="occurrences"/>
+        </sortItems>
+        <groupItems>
+            <ViewSettingsItem text="{locale>myapp.string.occurrences}" key="occurrences"/>
+        </groupItems>
+    </ViewSettingsDialog>
+</core:FragmentDefinition>

@@ -1,0 +1,48 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:c="sap.ui.commons" xmlns="sap.m"
+          xmlns:l="sap.ui.layout" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:t="sap.ui.table"
+          controllerName="myapp.controller.String">
+    <Panel headerText="{locale>myapp.string.title}">
+        <content>
+            <VBox>
+                <Input description="{locale>myapp.string.stringDescr}"
+                       value="{string>/str}"
+                       submit="onSubmitString"/>
+                <ObjectAttribute title="{locale>myapp.string.result}"
+                                 text="{string>/result}" />
+            
+                <Table id="stringTable"
+                       items="{
+			path: 'string>/table',
+			sorter: {
+				path: 'character'
+			}
+		}">
+                    <headerToolbar>
+                        <Toolbar>
+                            <Title text="{locale>myapp.invoices.stringTable}" />
+                            <ToolbarSpacer />
+                            <Button icon="sap-icon://drop-down-list"
+                                    press="onPushDialog"/>
+                        </Toolbar>
+                    </headerToolbar>
+                    <columns>
+                        <Column>
+                            <Label text="{locale>myapp.string.char}"/>
+                        </Column>
+                        <Column>
+                            <Label text="{locale>myapp.string.occurrences}"/>
+                        </Column>
+                    </columns>
+                    <items>
+                        <ColumnListItem>
+                            <cells>
+                                <Text text="{string>character}"/>
+                                <ObjectNumber number="{string>occurrences}"/>
+                            </cells>
+                        </ColumnListItem>
+                    </items>
+                </Table>
+            </VBox>
+        </content>
+    </Panel>
+</mvc:View>

@@ -1,0 +1,75 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:l="sap.ui.layout">
+    <Dialog title="{locale>myapp.dialogAddRowInvoices.title}">
+        <content>
+            <l:Grid validationError="onInputError"
+                    validationSuccess="onInputSuccess"
+                    formatError="onFormatError"
+                    parseError="onParseError"
+                    id="gridDialogRow">
+                <Label text="{locale>myapp.dialogInvoice.productName}"/>
+                <Input value="{ path: 'dialogInvoices>/ProductName',
+                                type : 'sap.ui.model.type.String',
+                                constraints : {
+						minLength: 1,
+						maxLength: 40
+                                            }
+                                }"/>
+                <Label text="{locale>myapp.dialogInvoice.shipperName}"/>
+                <Input value="{ path: 'dialogInvoices>/ShipperName',
+                                type : 'sap.ui.model.type.String',
+                                constraints : {
+						minLength: 1,
+						maxLength: 40
+                                            }
+                              }"/>
+
+                <Label text="{locale>myapp.dialogInvoice.quantity}"/>
+                <Input value="{ path: 'dialogInvoices>/Quantity',
+                                type : 'sap.ui.model.odata.type.Int16',
+                                constraints : {
+                                                nullable: false
+                                            }
+                              }"/>
+
+                <Label text="{locale>myapp.dialogInvoice.price}"/>
+                <Input value="{ path: 'dialogInvoices>/ExtendedPrice',
+                                type : 'sap.ui.model.odata.type.Decimal',
+                                costraints : { 
+                                                precision: 19,
+                                                scale: 4,
+                                                nullable: false
+                                             }
+                              }"/>
+
+                <Label text="{locale>myapp.dialogInvoice.status}"/>
+                <Input value="{ path: 'dialogInvoices>/Status',
+                                type : '.typeStatus',
+                                constraints : {
+                                                minLength: 1,
+                                                maxLength: 1
+                                            }
+                              }"
+                       showSuggestion="true"
+                       suggest="handleSuggestStatus"
+                       suggestionItems="{invoices>/statusItems/}"
+                       formatError="onFormatError"
+                       parseError="onParseError">
+                    <suggestionItems>
+                        <core:ListItem text="{invoices>status}"
+                                       additionalText="{invoices>statusText}"/>
+                    </suggestionItems>
+                </Input>
+            </l:Grid>
+        </content>
+        <Toolbar>
+            <Bar>
+                <contentRight>
+                    <Button icon="sap-icon://save" press="onPushSaveAddRow"/>
+                </contentRight>
+            </Bar>
+        </Toolbar>
+    </Dialog>
+</core:FragmentDefinition>
