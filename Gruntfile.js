@@ -95,6 +95,7 @@
                         cwd: '<%= dir.webapp %>',
                         src: [
                             '**',
+                            '!test/**',
                             '!META-INF/**',
                             '!WEB-INF/**',
                             '!.idea/**',
