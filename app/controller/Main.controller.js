@@ -13,6 +13,8 @@ sap.ui.define([
 
             var params = jQuery.sap.getUriParameters(window.location.href);
             this.getView().setModel(MyUtils.getODataModel());
+            this.getView().byId("mainPage").bindElement("/ProductSet(ProductID='Ananas')/");
+            
             console.log(params);
 
         },

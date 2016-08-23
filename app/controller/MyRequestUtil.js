@@ -15,8 +15,12 @@ sap.ui.define([
 
         },
         
-        getProductFromServer: function (oDataModel, modelUtil) {
-            
+        getProductFromServer: function (oDataModel) {
+            oDataModel.read("/ProductSet(ProductID='Ananas')", {
+                success: function (oData) {
+                    console.log(oData);
+                }
+            });
         }
 
     });
