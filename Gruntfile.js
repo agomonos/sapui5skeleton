@@ -6,7 +6,7 @@
         grunt.initConfig({
 
             ui5: {
-                version: '1.38.5'
+                version: '1.38.7'
             },
 
             dir: {
@@ -38,11 +38,25 @@
 
             connect: {
                 options: {
-                    port: 9876,
-                    hostname: '*'
+                    port: 9870,
+                    hostname: 'localhost',
+                    base: '.',
+                    middleware: function (connect, options, defaultMiddleware) {
+                        var proxy = require('grunt-connect-proxy/lib/utils').proxyRequest;
+                        return [
+                            // Include the proxy first
+                            proxy
+                        ].concat(defaultMiddleware);
+                    }
                 },
                 src: {},
-                dist: {}
+                dist: {},
+                proxies: {
+                    context: "/sap/opu/odata/SAP/ZMOSAICO_SRV", // When the url contains this...
+                    host: "sapgwd1b6.bonfiglioli.group", // Proxy to this host
+                    port: 8000,
+                    changeOrigin: true
+                }
             },
 
             openui5_connect: {
@@ -73,8 +87,7 @@
                 component: {
                     options: {
                         resources: {
-                            cwd: '<%= dir.webapp %>',
-                            prefix: 'myapp'
+                            cwd: '<%= dir.webapp %>'
                         },
                         dest: '<%= dir.dist %>'
                     },
@@ -95,11 +108,9 @@
                         cwd: '<%= dir.webapp %>',
                         src: [
                             '**',
-                            '!test/**',
                             '!META-INF/**',
                             '!WEB-INF/**',
-                            '!.idea/**',
-                            '!index_test.html'
+                            '!.idea/**'
                         ],
                         dest: '<%= dir.dist %>'
                     }, {
@@ -122,6 +133,7 @@
                     }
                     ]
                 }
+
             },
 
             eslint: {
@@ -137,7 +149,7 @@
                         replacements: [
                             {
                                 pattern: 'src=\"resources/sap-ui-core.js\"',
-                                replacement: 'src=\"resources/sap-ui-core.js\"',
+                                replacement: 'src=\"/sap/public/bc/ui5_ui5/1/resources/sap-ui-core.js\"'
                             }
                         ]
                     }
@@ -146,10 +158,7 @@
 
             watch: {
                 files: ['Gruntfile.js', '<%= dir.webapp %>/**/*.js', '<%= dir.webapp %>/**/*.xml', '<%= dir.webapp %>/**/*.html', '<%= dir.webapp %>/**/*.css', '<%= dir.webapp %>/**/*.json', '<%= dir.webapp %>/**/*.properties'],
-                tasks: ['build', 'copy:dist'],
-                options: {
-                    livereload: true
-                }
+                tasks: ['build']
             }
 
         });
@@ -158,6 +167,7 @@
         grunt.loadNpmTasks('grunt-contrib-jshint');
         grunt.loadNpmTasks('grunt-jsvalidate');
         grunt.loadNpmTasks('grunt-contrib-connect');
+        grunt.loadNpmTasks('grunt-connect-proxy');
         grunt.loadNpmTasks('grunt-contrib-clean');
         grunt.loadNpmTasks('grunt-contrib-copy');
         grunt.loadNpmTasks('grunt-openui5');
@@ -167,7 +177,7 @@
 
         // Server task
         grunt.registerTask('serve', function (target) {
-            grunt.task.run('openui5_connect:' + (target || 'src') + '');
+            grunt.task.run('openui5_connect:' + (target || 'src'));
         });
 
         // Compile task
@@ -180,8 +190,7 @@
         grunt.registerTask('lint', ['eslint']);
 
         // Build task
-        //grunt.registerTask('build', ['compile', 'openui5_preload', 'copy:dist', 'string-replace']);
-        grunt.registerTask('build', ['compile', 'copy:dist']);
+        grunt.registerTask('build', ['clean', 'compile', 'copy:dist']);
 
         // Watch task
         grunt.registerTask('mywatch', ['watch']);
