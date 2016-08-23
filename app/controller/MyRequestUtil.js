@@ -13,6 +13,10 @@ sap.ui.define([
 
 		    return "request";
 
+        },
+        
+        getProductFromServer: function (oDataModel, modelUtil) {
+            
         }
 
     });

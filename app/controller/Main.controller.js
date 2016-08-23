@@ -12,6 +12,7 @@ sap.ui.define([
         onInit: function () {
 
             var params = jQuery.sap.getUriParameters(window.location.href);
+            this.getView().setModel(MyUtils.getODataModel());
             console.log(params);
 
         },

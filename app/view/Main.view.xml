@@ -7,7 +7,20 @@
                     ariaLabelledBy="exitButtonLabel" class="sapUiSmallMarginEnd"/>
         </headerContent>
         <content>
-
+            <Table items="{/ProductSet/}">
+                <columns>
+                    <Column>
+                        <Text text="ProductID"/>
+                    </Column>
+                </columns>
+                <items>
+                    <ColumnListItem>
+                        <cells>
+                            <Input value="{ProductID}" />
+                        </cells>
+                    </ColumnListItem>
+                </items>
+            </Table>
             <Button text="{locale>myapp.goto.tmp}" press="onToTmpPage" class="sapUiSmallMarginEnd"/>
 
         </content>
