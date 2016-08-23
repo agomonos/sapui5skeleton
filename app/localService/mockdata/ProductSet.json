@@ -1,0 +1,14 @@
+[
+    {
+        "ProductID": "Mango",
+        "TypeCode": "MN",
+        "Category": "Frutta",
+        "Name": "Mango"
+    },
+    {
+        "ProductID": "Ananas",
+        "TypeCode": "AN",
+        "Category": "Frutta",
+        "Name": "Ananas"
+    }
+]
